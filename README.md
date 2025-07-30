@@ -1,8 +1,8 @@
-# F-Commerce
+![F-Commerce App](assets/images/logowithname.png)
 
 A modern Flutter e-commerce app built with Neumorphic design principles. This app showcases a monochromatic, muted color scheme with soft shadows and highlights to create a sleek, tactile user experience.
 
-![F-Commerce App](assets/images/logowithname.png)
+
 
 ## Features
 
