@@ -6,33 +6,37 @@ class ApiClient {
   static const String baseUrl = 'https://fakestoreapi.com';
 
   ApiClient()
-      : _dio = Dio(
-          BaseOptions(
-            baseUrl: baseUrl,
-            connectTimeout: const Duration(seconds: 10),
-            receiveTimeout: const Duration(seconds: 10),
-            responseType: ResponseType.json,
-          ),
-        ) {
+    : _dio = Dio(
+        BaseOptions(
+          baseUrl: baseUrl,
+          connectTimeout: const Duration(seconds: 10),
+          receiveTimeout: const Duration(seconds: 10),
+          responseType: ResponseType.json,
+        ),
+      ) {
     // Add interceptors
-    _dio.interceptors.add(LogInterceptor(
-      request: kDebugMode,
-      requestHeader: kDebugMode,
-      requestBody: kDebugMode,
-      responseHeader: kDebugMode,
-      responseBody: kDebugMode,
-      error: kDebugMode,
-    ));
+    _dio.interceptors.add(
+      LogInterceptor(
+        request: kDebugMode,
+        requestHeader: kDebugMode,
+        requestBody: kDebugMode,
+        responseHeader: kDebugMode,
+        responseBody: kDebugMode,
+        error: kDebugMode,
+      ),
+    );
   }
 
   // Add auth token interceptor
   void setAuthToken(String token) {
-    _dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (options, handler) {
-        options.headers['Authorization'] = 'Bearer $token';
-        return handler.next(options);
-      },
-    ));
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          options.headers['Authorization'] = 'Bearer $token';
+          return handler.next(options);
+        },
+      ),
+    );
   }
 
   // Generic GET request
@@ -114,16 +118,16 @@ class ApiClient {
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
         return TimeoutException('Connection timed out. Please try again.');
-      
+
       case DioExceptionType.badResponse:
         return _handleResponseError(error);
-      
+
       case DioExceptionType.cancel:
         return RequestCancelledException('Request was cancelled');
-      
+
       case DioExceptionType.connectionError:
         return NetworkException('No internet connection');
-      
+
       default:
         return ApiException('An unexpected error occurred: ${error.message}');
     }
@@ -132,12 +136,14 @@ class ApiClient {
   Exception _handleResponseError(DioException error) {
     final statusCode = error.response?.statusCode;
     final data = error.response?.data;
-    
+
     switch (statusCode) {
       case 400:
         return BadRequestException('Invalid request: ${data ?? 'Bad Request'}');
       case 401:
-        return UnauthorizedException('Unauthorized: ${data ?? 'Authentication required'}');
+        return UnauthorizedException(
+          'Unauthorized: ${data ?? 'Authentication required'}',
+        );
       case 403:
         return ForbiddenException('Access denied: ${data ?? 'Forbidden'}');
       case 404:
@@ -145,11 +151,17 @@ class ApiClient {
       case 409:
         return ConflictException('Conflict: ${data ?? 'Resource conflict'}');
       case 422:
-        return ValidationException('Validation error: ${data ?? 'Invalid data'}');
+        return ValidationException(
+          'Validation error: ${data ?? 'Invalid data'}',
+        );
       case 500:
-        return ServerException('Server error: ${data ?? 'Internal server error'}');
+        return ServerException(
+          'Server error: ${data ?? 'Internal server error'}',
+        );
       default:
-        return ApiException('API error ${statusCode ?? 'unknown'}: ${data ?? error.message}');
+        return ApiException(
+          'API error ${statusCode ?? 'unknown'}: ${data ?? error.message}',
+        );
     }
   }
 }

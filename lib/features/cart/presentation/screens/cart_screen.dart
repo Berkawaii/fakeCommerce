@@ -13,7 +13,7 @@ class CartScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cartState = ref.watch(cartStateProvider);
-    
+
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -25,18 +25,12 @@ class CartScreen extends ConsumerWidget {
             SizedBox(height: 24.h),
             if (cartState.isLoading)
               const Expanded(
-                child: Center(
-                  child: NeumorphicProgressIndeterminate(),
-                ),
+                child: Center(child: NeumorphicProgressIndeterminate()),
               )
             else if (cartState.items.isEmpty)
-              Expanded(
-                child: _buildEmptyCart(),
-              )
+              Expanded(child: _buildEmptyCart())
             else
-              Expanded(
-                child: _buildCartItems(context, ref, cartState),
-              ),
+              Expanded(child: _buildCartItems(context, ref, cartState)),
             if (cartState.items.isNotEmpty)
               _buildCheckoutSection(context, ref, cartState),
           ],
@@ -48,10 +42,7 @@ class CartScreen extends ConsumerWidget {
   Widget _buildHeader() {
     return Text(
       'Shopping Cart',
-      style: TextStyle(
-        fontSize: 28.sp,
-        fontWeight: FontWeight.bold,
-      ),
+      style: TextStyle(fontSize: 28.sp, fontWeight: FontWeight.bold),
     );
   }
 
@@ -77,10 +68,7 @@ class CartScreen extends ConsumerWidget {
           SizedBox(height: 8.h),
           Text(
             'Browse products and add items to your cart',
-            style: TextStyle(
-              fontSize: 16.sp,
-              color: Colors.grey,
-            ),
+            style: TextStyle(fontSize: 16.sp, color: Colors.grey),
             textAlign: TextAlign.center,
           ),
         ],
@@ -88,7 +76,11 @@ class CartScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildCartItems(BuildContext context, WidgetRef ref, CartState cartState) {
+  Widget _buildCartItems(
+    BuildContext context,
+    WidgetRef ref,
+    CartState cartState,
+  ) {
     return ListView.separated(
       physics: const BouncingScrollPhysics(),
       itemCount: cartState.items.length,
@@ -127,11 +119,10 @@ class CartScreen extends ConsumerWidget {
                         imageUrl: item.imageUrl!,
                         fit: BoxFit.contain,
                         placeholder: (context, url) => const Center(
-                          child: NeumorphicProgressIndeterminate(
-                            height: 2,
-                          ),
+                          child: NeumorphicProgressIndeterminate(height: 2),
                         ),
-                        errorWidget: (context, url, error) => const Icon(Icons.error),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
                       ),
                     )
                   : const Icon(Icons.image_not_supported),
@@ -179,7 +170,11 @@ class CartScreen extends ConsumerWidget {
                       ),
                       onPressed: () {
                         if (item.quantity > 1) {
-                          _updateQuantity(ref, item.productId, item.quantity - 1);
+                          _updateQuantity(
+                            ref,
+                            item.productId,
+                            item.quantity - 1,
+                          );
                         }
                       },
                       padding: EdgeInsets.all(8.r),
@@ -211,10 +206,7 @@ class CartScreen extends ConsumerWidget {
                         _updateQuantity(ref, item.productId, item.quantity + 1);
                       },
                       padding: EdgeInsets.all(8.r),
-                      child: Icon(
-                        Icons.add,
-                        size: 16.sp,
-                      ),
+                      child: Icon(Icons.add, size: 16.sp),
                     ),
                   ],
                 ),
@@ -222,12 +214,17 @@ class CartScreen extends ConsumerWidget {
                 NeumorphicButton(
                   style: NeumorphicStyle(
                     depth: 2,
-                    boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
+                    boxShape: NeumorphicBoxShape.roundRect(
+                      BorderRadius.circular(8),
+                    ),
                     color: AppTheme.errorColor.withOpacity(0.1),
                     intensity: 0.6,
                   ),
                   onPressed: () => _removeItem(ref, item.productId),
-                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 6.h,
+                  ),
                   child: Text(
                     'Remove',
                     style: TextStyle(
@@ -244,7 +241,11 @@ class CartScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildCheckoutSection(BuildContext context, WidgetRef ref, CartState cartState) {
+  Widget _buildCheckoutSection(
+    BuildContext context,
+    WidgetRef ref,
+    CartState cartState,
+  ) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 16.h),
       child: Column(
@@ -262,7 +263,10 @@ class CartScreen extends ConsumerWidget {
                 children: [
                   _buildSummaryRow('Items', '${cartState.itemCount}'),
                   SizedBox(height: 8.h),
-                  _buildSummaryRow('Subtotal', '\$${cartState.total.toStringAsFixed(2)}'),
+                  _buildSummaryRow(
+                    'Subtotal',
+                    '\$${cartState.total.toStringAsFixed(2)}',
+                  ),
                   SizedBox(height: 8.h),
                   _buildSummaryRow('Shipping', 'Free'),
                   SizedBox(height: 8.h),
@@ -336,14 +340,20 @@ class CartScreen extends ConsumerWidget {
     ref.read(cartStateProvider.notifier).removeItem(productId);
   }
 
-  void _proceedToCheckout(BuildContext context, WidgetRef ref, CartState cartState) {
+  void _proceedToCheckout(
+    BuildContext context,
+    WidgetRef ref,
+    CartState cartState,
+  ) {
     // In a real app, we'd check authentication first
     // For now, just navigate to checkout
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Checkout'),
-        content: Text('Thank you for your order!\nTotal: \$${cartState.total.toStringAsFixed(2)}'),
+        content: Text(
+          'Thank you for your order!\nTotal: \$${cartState.total.toStringAsFixed(2)}',
+        ),
         actions: [
           TextButton(
             onPressed: () {

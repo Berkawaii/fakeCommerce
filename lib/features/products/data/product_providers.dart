@@ -13,12 +13,18 @@ final productCategoriesProvider = FutureProvider<List<String>>((ref) async {
   return repository.getAllCategories();
 });
 
-final categoryProductsProvider = FutureProvider.family<List<Product>, String>((ref, category) async {
+final categoryProductsProvider = FutureProvider.family<List<Product>, String>((
+  ref,
+  category,
+) async {
   final repository = ref.watch(productRepositoryProvider);
   return repository.getProductsByCategory(category);
 });
 
-final productDetailsProvider = FutureProvider.family<Product, int>((ref, productId) async {
+final productDetailsProvider = FutureProvider.family<Product, int>((
+  ref,
+  productId,
+) async {
   final repository = ref.watch(productRepositoryProvider);
   return repository.getProductById(productId);
 });

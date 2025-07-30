@@ -7,7 +7,7 @@ class StorageService {
   StorageService._internal();
 
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
-  
+
   // Box names
   static const String _settingsBox = 'settings';
   static const String _cartBox = 'cart';
@@ -22,7 +22,7 @@ class StorageService {
 
   Future<void> initialize() async {
     await Hive.initFlutter();
-    
+
     // Open boxes
     await Hive.openBox(_settingsBox);
     await Hive.openBox(_cartBox);
@@ -107,7 +107,7 @@ class StorageService {
     final box = Hive.box(_wishlistBox);
     final dynamic rawWishlist = box.get('wishlist');
     if (rawWishlist == null) return false;
-    
+
     final List<int> wishlist = List<int>.from(rawWishlist);
     return wishlist.contains(productId);
   }
@@ -154,7 +154,7 @@ class StorageService {
   bool isCacheExpired() {
     final lastUpdated = getProductsCacheTime();
     if (lastUpdated == null) return true;
-    
+
     final now = DateTime.now();
     final difference = now.difference(lastUpdated);
     // Cache expires after 1 hour

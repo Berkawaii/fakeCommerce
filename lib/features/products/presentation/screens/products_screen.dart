@@ -77,8 +77,8 @@ class _ProductsScreenState extends ConsumerState<ProductsScreen> {
           itemBuilder: (context, index) {
             final isAllCategory = index == 0;
             final category = isAllCategory ? 'All' : categories[index - 1];
-            final isSelected = isAllCategory 
-                ? _selectedCategory == null 
+            final isSelected = isAllCategory
+                ? _selectedCategory == null
                 : _selectedCategory == categories[index - 1];
 
             return Padding(
@@ -96,7 +96,7 @@ class _ProductsScreenState extends ConsumerState<ProductsScreen> {
                     boxShape: NeumorphicBoxShape.roundRect(
                       BorderRadius.circular(25),
                     ),
-                    color: isSelected 
+                    color: isSelected
                         ? NeumorphicTheme.accentColor(context).withOpacity(0.1)
                         : NeumorphicTheme.baseColor(context),
                   ),
@@ -107,8 +107,10 @@ class _ProductsScreenState extends ConsumerState<ProductsScreen> {
                       _capitalizeFirstLetter(category),
                       style: TextStyle(
                         fontSize: 14.sp,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                        color: isSelected 
+                        fontWeight: isSelected
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                        color: isSelected
                             ? NeumorphicTheme.accentColor(context)
                             : NeumorphicTheme.defaultTextColor(context),
                       ),
@@ -153,10 +155,7 @@ class _ProductsScreenState extends ConsumerState<ProductsScreen> {
             children: [
               Text(
                 'Failed to load products',
-                style: TextStyle(
-                  color: AppTheme.errorColor,
-                  fontSize: 18.sp,
-                ),
+                style: TextStyle(color: AppTheme.errorColor, fontSize: 18.sp),
               ),
               SizedBox(height: 8.h),
               Text(
@@ -224,13 +223,10 @@ class _ProductsScreenState extends ConsumerState<ProductsScreen> {
                   imageUrl: product.imageUrl,
                   fit: BoxFit.contain,
                   placeholder: (context, url) => const Center(
-                    child: NeumorphicProgressIndeterminate(
-                      height: 4,
-                    ),
+                    child: NeumorphicProgressIndeterminate(height: 4),
                   ),
-                  errorWidget: (context, url, error) => const Center(
-                    child: Icon(Icons.error_outline),
-                  ),
+                  errorWidget: (context, url, error) =>
+                      const Center(child: Icon(Icons.error_outline)),
                 ),
               ),
             ),
@@ -258,7 +254,9 @@ class _ProductsScreenState extends ConsumerState<ProductsScreen> {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontSize: 12.sp,
-                        color: NeumorphicTheme.defaultTextColor(context).withOpacity(0.6),
+                        color: NeumorphicTheme.defaultTextColor(
+                          context,
+                        ).withOpacity(0.6),
                       ),
                     ),
                     const Spacer(),

@@ -3,19 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:f_commerce/core/storage/storage_service.dart';
 import 'package:f_commerce/core/providers/providers.dart';
 
-enum ThemeMode {
-  light,
-  dark,
-  system,
-}
+enum ThemeMode { light, dark, system }
 
 class ThemeNotifier extends StateNotifier<ThemeMode> {
   final StorageService _storageService;
-  
+
   ThemeNotifier(this._storageService) : super(ThemeMode.system) {
     _loadTheme();
   }
-  
+
   Future<void> _loadTheme() async {
     final savedTheme = _storageService.getThemeMode();
     if (savedTheme != null) {
@@ -25,7 +21,7 @@ class ThemeNotifier extends StateNotifier<ThemeMode> {
       );
     }
   }
-  
+
   Future<void> setTheme(ThemeMode mode) async {
     await _storageService.saveThemeMode(mode.toString());
     state = mode;

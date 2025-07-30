@@ -9,8 +9,8 @@ class ProductRepository {
   ProductRepository({
     required ApiClient apiClient,
     required StorageService storageService,
-  })  : _apiClient = apiClient,
-        _storageService = storageService;
+  }) : _apiClient = apiClient,
+       _storageService = storageService;
 
   // Fetch all products
   Future<List<Product>> getAllProducts() async {
@@ -18,9 +18,7 @@ class ProductRepository {
     if (!_storageService.isCacheExpired()) {
       final cachedProducts = _storageService.getCachedProducts();
       if (cachedProducts != null) {
-        return cachedProducts
-            .map((json) => Product.fromJson(json))
-            .toList();
+        return cachedProducts.map((json) => Product.fromJson(json)).toList();
       }
     }
 
@@ -32,12 +30,12 @@ class ProductRepository {
         final products = productList
             .map((json) => Product.fromJson(json as Map<String, dynamic>))
             .toList();
-        
+
         // Cache products
         _storageService.cacheProducts(
           products.map((product) => product.toJson()).toList(),
         );
-        
+
         return products;
       },
     );
@@ -76,7 +74,7 @@ class ProductRepository {
             .where((json) => json['category'] == category)
             .map((json) => Product.fromJson(json))
             .toList();
-        
+
         if (categoryProducts.isNotEmpty) {
           return categoryProducts;
         }

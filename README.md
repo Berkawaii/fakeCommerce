@@ -2,7 +2,7 @@
 
 A modern Flutter e-commerce app built with Neumorphic design principles. This app showcases a monochromatic, muted color scheme with soft shadows and highlights to create a sleek, tactile user experience.
 
-![F-Commerce App](https://via.placeholder.com/800x400?text=F-Commerce+App)
+![F-Commerce App](assets/images/logowithname.png)
 
 ## Features
 
@@ -37,10 +37,10 @@ This project follows a feature-based architecture pattern with clean separation 
 
 <table>
   <tr>
-    <td align="center"><img src="https://via.placeholder.com/200x400?text=Home+Screen" width="200" alt="Home Screen"/></td>
-    <td align="center"><img src="https://via.placeholder.com/200x400?text=Product+Details" width="200" alt="Product Details"/></td>
-    <td align="center"><img src="https://via.placeholder.com/200x400?text=Cart" width="200" alt="Cart Screen"/></td>
-    <td align="center"><img src="https://via.placeholder.com/200x400?text=Profile" width="200" alt="Profile Screen"/></td>
+    <td align="center"><img src="assets/screenshots/home_screen.png" width="200" alt="Home Screen"/></td>
+    <td align="center"><img src="assets/screenshots/product_details.png" width="200" alt="Product Details"/></td>
+    <td align="center"><img src="assets/screenshots/cart_screen.png" width="200" alt="Cart Screen"/></td>
+    <td align="center"><img src="assets/screenshots/profile_screen.png" width="200" alt="Profile Screen"/></td>
   </tr>
   <tr>
     <td align="center">Home</td>

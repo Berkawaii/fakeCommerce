@@ -15,7 +15,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   int _selectedIndex = 0;
-  
+
   final List<Widget> _screens = [
     const ProductsScreen(),
     const CartScreen(),
@@ -25,7 +25,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return NeumorphicTheme(
-      themeMode: NeumorphicTheme.isUsingDark(context) 
+      themeMode: NeumorphicTheme.isUsingDark(context)
           ? ThemeMode.dark
           : ThemeMode.light,
       theme: NeumorphicTheme.currentTheme(context),
@@ -51,7 +51,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       child: Container(
         height: 65.h, // Slightly smaller height
-        padding: EdgeInsets.symmetric(horizontal: 20.w), // Slightly more horizontal padding
+        padding: EdgeInsets.symmetric(
+          horizontal: 20.w,
+        ), // Slightly more horizontal padding
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -66,7 +68,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Widget _buildNavItem(int index, IconData icon, String label) {
     final isSelected = index == _selectedIndex;
-    
+
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -81,10 +83,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             size: 24.sp, // Slightly smaller icon
             style: NeumorphicStyle(
               depth: isSelected ? 2 : 0, // Reduced depth for more subtle effect
-              intensity: isSelected ? 0.6 : 0.4, // Reduced intensity for muted look
-              color: isSelected 
+              intensity: isSelected
+                  ? 0.6
+                  : 0.4, // Reduced intensity for muted look
+              color: isSelected
                   ? NeumorphicTheme.accentColor(context)
-                  : NeumorphicTheme.defaultTextColor(context).withOpacity(0.7), // More muted unselected color
+                  : NeumorphicTheme.defaultTextColor(
+                      context,
+                    ).withOpacity(0.7), // More muted unselected color
             ),
           ),
           SizedBox(height: 3.h), // Slightly reduced spacing
@@ -92,10 +98,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             label,
             style: TextStyle(
               fontSize: 11.sp, // Slightly smaller text
-              fontWeight: isSelected ? FontWeight.w500 : FontWeight.w400, // Less bold for more refined look
-              color: isSelected 
+              fontWeight: isSelected
+                  ? FontWeight.w500
+                  : FontWeight.w400, // Less bold for more refined look
+              color: isSelected
                   ? NeumorphicTheme.accentColor(context)
-                  : NeumorphicTheme.defaultTextColor(context).withOpacity(0.7), // More muted unselected color
+                  : NeumorphicTheme.defaultTextColor(
+                      context,
+                    ).withOpacity(0.7), // More muted unselected color
             ),
           ),
         ],

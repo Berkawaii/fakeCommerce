@@ -17,10 +17,8 @@ class Cart {
     required this.items,
   });
 
-  double get total => items.fold(
-      0,
-      (sum, item) => sum + (item.price ?? 0) * item.quantity,
-    );
+  double get total =>
+      items.fold(0, (sum, item) => sum + (item.price ?? 0) * item.quantity);
 
   factory Cart.fromJson(Map<String, dynamic> json) => _$CartFromJson(json);
   Map<String, dynamic> toJson() => _$CartToJson(this);
@@ -42,6 +40,7 @@ class CartItem {
     this.imageUrl,
   });
 
-  factory CartItem.fromJson(Map<String, dynamic> json) => _$CartItemFromJson(json);
+  factory CartItem.fromJson(Map<String, dynamic> json) =>
+      _$CartItemFromJson(json);
   Map<String, dynamic> toJson() => _$CartItemToJson(this);
 }

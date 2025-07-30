@@ -33,12 +33,10 @@ class UserName {
   final String firstname;
   final String lastname;
 
-  UserName({
-    required this.firstname,
-    required this.lastname,
-  });
+  UserName({required this.firstname, required this.lastname});
 
-  factory UserName.fromJson(Map<String, dynamic> json) => _$UserNameFromJson(json);
+  factory UserName.fromJson(Map<String, dynamic> json) =>
+      _$UserNameFromJson(json);
   Map<String, dynamic> toJson() => _$UserNameToJson(this);
 }
 
@@ -58,7 +56,8 @@ class Address {
     this.geolocation,
   });
 
-  factory Address.fromJson(Map<String, dynamic> json) => _$AddressFromJson(json);
+  factory Address.fromJson(Map<String, dynamic> json) =>
+      _$AddressFromJson(json);
   Map<String, dynamic> toJson() => _$AddressToJson(this);
 }
 
@@ -67,11 +66,9 @@ class GeoLocation {
   final String lat;
   final String long;
 
-  GeoLocation({
-    required this.lat,
-    required this.long,
-  });
+  GeoLocation({required this.lat, required this.long});
 
-  factory GeoLocation.fromJson(Map<String, dynamic> json) => _$GeoLocationFromJson(json);
+  factory GeoLocation.fromJson(Map<String, dynamic> json) =>
+      _$GeoLocationFromJson(json);
   Map<String, dynamic> toJson() => _$GeoLocationToJson(this);
 }

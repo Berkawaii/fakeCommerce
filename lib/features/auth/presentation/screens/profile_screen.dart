@@ -10,7 +10,7 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = NeumorphicTheme.isUsingDark(context);
-    
+
     return SafeArea(
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -46,10 +46,7 @@ class ProfileScreen extends ConsumerWidget {
       alignment: Alignment.centerLeft,
       child: Text(
         'Profile',
-        style: TextStyle(
-          fontSize: 28.sp,
-          fontWeight: FontWeight.bold,
-        ),
+        style: TextStyle(fontSize: 28.sp, fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -64,14 +61,8 @@ class ProfileScreen extends ConsumerWidget {
       child: Container(
         width: 120.w,
         height: 120.w,
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-        ),
-        child: Icon(
-          Icons.person,
-          size: 80.sp,
-          color: Colors.grey,
-        ),
+        decoration: const BoxDecoration(shape: BoxShape.circle),
+        child: Icon(Icons.person, size: 80.sp, color: Colors.grey),
       ),
     );
   }
@@ -79,20 +70,14 @@ class ProfileScreen extends ConsumerWidget {
   Widget _buildProfileName(String name) {
     return Text(
       name,
-      style: TextStyle(
-        fontSize: 24.sp,
-        fontWeight: FontWeight.bold,
-      ),
+      style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
     );
   }
 
   Widget _buildProfileEmail(String email) {
     return Text(
       email,
-      style: TextStyle(
-        fontSize: 16.sp,
-        color: Colors.grey,
-      ),
+      style: TextStyle(fontSize: 16.sp, color: Colors.grey),
     );
   }
 
@@ -123,23 +108,14 @@ class ProfileScreen extends ConsumerWidget {
         padding: EdgeInsets.all(16.r),
         child: Row(
           children: [
-            Icon(
-              icon,
-              size: 24.sp,
-            ),
+            Icon(icon, size: 24.sp),
             SizedBox(width: 16.w),
             Text(
               title,
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
-              ),
+              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
             ),
             const Spacer(),
-            Icon(
-              Icons.arrow_forward_ios,
-              size: 16.sp,
-            ),
+            Icon(Icons.arrow_forward_ios, size: 16.sp),
           ],
         ),
       ),
@@ -157,17 +133,11 @@ class ProfileScreen extends ConsumerWidget {
         padding: EdgeInsets.all(16.r),
         child: Row(
           children: [
-            Icon(
-              isDarkMode ? Icons.dark_mode : Icons.light_mode,
-              size: 24.sp,
-            ),
+            Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode, size: 24.sp),
             SizedBox(width: 16.w),
             Text(
               'Dark Mode',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
-              ),
+              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
             ),
             const Spacer(),
             NeumorphicSwitch(
@@ -176,8 +146,9 @@ class ProfileScreen extends ConsumerWidget {
                 lightSource: LightSource.topLeft,
               ),
               onChanged: (value) {
-                NeumorphicTheme.of(context)?.themeMode = 
-                  value ? ThemeMode.dark : ThemeMode.light;
+                NeumorphicTheme.of(context)?.themeMode = value
+                    ? ThemeMode.dark
+                    : ThemeMode.light;
               },
             ),
           ],
@@ -211,9 +182,7 @@ class ProfileScreen extends ConsumerWidget {
                   Navigator.pop(context);
                   // In a real app, we would call auth service to logout
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Logged out successfully'),
-                    ),
+                    const SnackBar(content: Text('Logged out successfully')),
                   );
                 },
                 child: const Text('Logout'),

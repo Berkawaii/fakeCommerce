@@ -10,21 +10,12 @@ class CartState {
   final bool isLoading;
   final String? errorMessage;
 
-  CartState({
-    this.items = const [],
-    this.isLoading = false,
-    this.errorMessage,
-  });
+  CartState({this.items = const [], this.isLoading = false, this.errorMessage});
 
-  double get total => items.fold(
-    0,
-    (sum, item) => sum + (item.price ?? 0) * item.quantity,
-  );
+  double get total =>
+      items.fold(0, (sum, item) => sum + (item.price ?? 0) * item.quantity);
 
-  int get itemCount => items.fold(
-    0,
-    (sum, item) => sum + item.quantity,
-  );
+  int get itemCount => items.fold(0, (sum, item) => sum + item.quantity);
 
   CartState copyWith({
     List<CartItem>? items,
@@ -60,12 +51,12 @@ class CartNotifier extends StateNotifier<CartState> {
   Future<void> addToCart(Product product, int quantity) async {
     try {
       state = state.copyWith(isLoading: true, errorMessage: null);
-      
+
       await _cartRepository.addToCart(product, quantity);
-      
+
       // Reload cart
       await _loadCart();
-      
+
       state = state.copyWith(isLoading: false);
     } catch (e) {
       state = state.copyWith(
@@ -78,12 +69,12 @@ class CartNotifier extends StateNotifier<CartState> {
   Future<void> updateQuantity(int productId, int quantity) async {
     try {
       state = state.copyWith(isLoading: true, errorMessage: null);
-      
+
       await _cartRepository.updateCartItemQuantity(productId, quantity);
-      
+
       // Reload cart
       await _loadCart();
-      
+
       state = state.copyWith(isLoading: false);
     } catch (e) {
       state = state.copyWith(
@@ -96,12 +87,12 @@ class CartNotifier extends StateNotifier<CartState> {
   Future<void> removeItem(int productId) async {
     try {
       state = state.copyWith(isLoading: true, errorMessage: null);
-      
+
       await _cartRepository.removeFromCart(productId);
-      
+
       // Reload cart
       await _loadCart();
-      
+
       state = state.copyWith(isLoading: false);
     } catch (e) {
       state = state.copyWith(
@@ -114,9 +105,9 @@ class CartNotifier extends StateNotifier<CartState> {
   Future<void> clearCart() async {
     try {
       state = state.copyWith(isLoading: true, errorMessage: null);
-      
+
       await _cartRepository.clearCart();
-      
+
       state = state.copyWith(isLoading: false, items: []);
     } catch (e) {
       state = state.copyWith(
@@ -129,9 +120,9 @@ class CartNotifier extends StateNotifier<CartState> {
   Future<void> checkout(int userId) async {
     try {
       state = state.copyWith(isLoading: true, errorMessage: null);
-      
+
       await _cartRepository.createOrder(userId);
-      
+
       state = state.copyWith(isLoading: false, items: []);
     } catch (e) {
       state = state.copyWith(
@@ -149,7 +140,10 @@ final cartStateProvider = StateNotifierProvider<CartNotifier, CartState>((ref) {
 });
 
 // Orders provider
-final userOrdersProvider = FutureProvider.family<List<Cart>, int>((ref, userId) async {
+final userOrdersProvider = FutureProvider.family<List<Cart>, int>((
+  ref,
+  userId,
+) async {
   final repository = ref.watch(cartRepositoryProvider);
   return repository.getUserOrders(userId);
 });

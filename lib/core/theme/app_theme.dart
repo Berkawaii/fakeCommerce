@@ -8,7 +8,7 @@ class AppTheme {
   static const Color _lightAccentColor = Color(0xFF6D6D80);
   static const Color _lightTextColor = Color(0xFF383844);
   static const Color _lightTextSecondaryColor = Color(0xFF71717A);
-  
+
   // Monochromatic, muted dark theme colors
   static const Color _darkBackgroundColor = Color(0xFF1F1F28);
   static const Color _darkSurfaceColor = Color(0xFF2C2C35);
@@ -42,9 +42,7 @@ class AppTheme {
         fontWeight: FontWeight.w500, // Less bold for more subtle look
       ),
       color: _lightBackgroundColor,
-      iconTheme: const IconThemeData(
-        color: _lightTextColor,
-      ),
+      iconTheme: const IconThemeData(color: _lightTextColor),
     ),
     textTheme: TextTheme(
       headlineLarge: TextStyle(
@@ -82,7 +80,9 @@ class AppTheme {
       ),
     ),
     buttonStyle: NeumorphicStyle(
-      boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10)), // Slightly smaller radius
+      boxShape: NeumorphicBoxShape.roundRect(
+        BorderRadius.circular(10),
+      ), // Slightly smaller radius
       depth: 5, // Less depth for more subtle effect
       intensity: 0.5, // Less intensity for muted look
       color: _lightSurfaceColor, // Using surface color for buttons
@@ -102,7 +102,9 @@ class AppTheme {
     depth: 4, // Less depth for subtle effect
     intensity: 0.4, // Less intensity for muted look
     accentColor: _darkAccentColor,
-    shadowLightColor: Colors.white.withOpacity(0.05), // Very subtle light shadow
+    shadowLightColor: Colors.white.withOpacity(
+      0.05,
+    ), // Very subtle light shadow
     shadowDarkColor: Colors.black.withOpacity(0.6), // Softer dark shadow
     appBarTheme: NeumorphicAppBarThemeData(
       buttonStyle: NeumorphicStyle(
@@ -157,7 +159,9 @@ class AppTheme {
       ),
     ),
     buttonStyle: NeumorphicStyle(
-      boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10)), // Slightly smaller radius
+      boxShape: NeumorphicBoxShape.roundRect(
+        BorderRadius.circular(10),
+      ), // Slightly smaller radius
       depth: 3, // Less depth for more subtle effect
       intensity: 0.4, // Less intensity for muted look
       color: _darkSurfaceColor, // Using surface color for buttons

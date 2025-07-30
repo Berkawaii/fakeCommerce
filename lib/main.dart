@@ -11,16 +11,12 @@ import 'package:f_commerce/features/products/presentation/screens/home_screen.da
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Initialize storage
   final storageService = StorageService();
   await storageService.initialize();
-  
-  runApp(
-    ProviderScope(
-      child: MyApp(),
-    ),
-  );
+
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends ConsumerWidget {
@@ -29,7 +25,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(theme_provider.themeProvider);
-    
+
     return ScreenUtilInit(
       designSize: const Size(375, 812), // Design size based on iPhone X
       minTextAdapt: true,
@@ -46,7 +42,7 @@ class MyApp extends ConsumerWidget {
       },
     );
   }
-  
+
   ThemeMode _getThemeMode(theme_provider.ThemeMode mode) {
     switch (mode) {
       case theme_provider.ThemeMode.light:

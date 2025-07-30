@@ -10,15 +10,12 @@ class AuthRepository {
   AuthRepository({
     required ApiClient apiClient,
     required StorageService storageService,
-  })  : _apiClient = apiClient,
-        _storageService = storageService;
+  }) : _apiClient = apiClient,
+       _storageService = storageService;
 
   // Login user
   Future<AuthResponse> login(String username, String password) async {
-    final authRequest = AuthRequest(
-      username: username,
-      password: password,
-    );
+    final authRequest = AuthRequest(username: username, password: password);
 
     final response = await _apiClient.post<AuthResponse>(
       endpoint: '/auth/login',
@@ -28,7 +25,7 @@ class AuthRepository {
 
     // Save token
     await _storageService.saveAuthToken(response.token);
-    
+
     // Update API client with the token
     _apiClient.setAuthToken(response.token);
 

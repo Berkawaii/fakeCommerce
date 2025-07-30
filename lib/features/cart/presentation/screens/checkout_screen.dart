@@ -36,7 +36,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     final cartState = ref.watch(cartStateProvider);
-    
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -79,18 +79,12 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
           ),
           onPressed: () => Navigator.pop(context),
           padding: EdgeInsets.all(8.r),
-          child: Icon(
-            Icons.arrow_back,
-            size: 20.sp,
-          ),
+          child: Icon(Icons.arrow_back, size: 20.sp),
         ),
         SizedBox(width: 16.w),
         Text(
           'Checkout',
-          style: TextStyle(
-            fontSize: 24.sp,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
         ),
       ],
     );
@@ -110,15 +104,15 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
           children: [
             Text(
               'Order Summary',
-              style: TextStyle(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 16.h),
             _buildSummaryRow('Items', '${cartState.itemCount}'),
             SizedBox(height: 8.h),
-            _buildSummaryRow('Subtotal', '\$${cartState.total.toStringAsFixed(2)}'),
+            _buildSummaryRow(
+              'Subtotal',
+              '\$${cartState.total.toStringAsFixed(2)}',
+            ),
             SizedBox(height: 8.h),
             _buildSummaryRow('Shipping', 'Free'),
             SizedBox(height: 8.h),
@@ -163,10 +157,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
       children: [
         Text(
           'Shipping Information',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 16.h),
         _buildTextField(
@@ -275,10 +266,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
           decoration: InputDecoration(
             labelText: label,
             border: InputBorder.none,
-            errorStyle: TextStyle(
-              color: AppTheme.errorColor,
-              fontSize: 12.sp,
-            ),
+            errorStyle: TextStyle(color: AppTheme.errorColor, fontSize: 12.sp),
           ),
         ),
       ),
@@ -291,10 +279,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
       children: [
         Text(
           'Payment Method',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 16.h),
         _buildPaymentOption(
@@ -324,7 +309,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
     required IconData icon,
   }) {
     final isSelected = _paymentMethod == value;
-    
+
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -355,7 +340,9 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                  color: isSelected ? NeumorphicTheme.accentColor(context) : null,
+                  color: isSelected
+                      ? NeumorphicTheme.accentColor(context)
+                      : null,
                 ),
               ),
               const Spacer(),
@@ -378,7 +365,9 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                 child: Icon(
                   Icons.circle,
                   size: 16.sp,
-                  color: isSelected ? NeumorphicTheme.accentColor(context) : Colors.transparent,
+                  color: isSelected
+                      ? NeumorphicTheme.accentColor(context)
+                      : Colors.transparent,
                 ),
               ),
             ],
@@ -417,10 +406,10 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
     if (_formKey.currentState?.validate() ?? false) {
       // In a real app, we would send the order to the server
       // For now, just show a success message and clear the cart
-      
+
       // Clear the cart
       ref.read(cartStateProvider.notifier).clearCart();
-      
+
       // Show success message and navigate back to home
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -428,7 +417,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
           backgroundColor: Colors.green,
         ),
       );
-      
+
       // Pop twice to go back to home screen
       Navigator.pop(context);
       Navigator.pop(context);

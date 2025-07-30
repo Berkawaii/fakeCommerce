@@ -56,36 +56,27 @@ class AuthNotifier extends StateNotifier<AuthState> {
   Future<void> login(String username, String password) async {
     try {
       state = state.copyWith(isLoading: true, errorMessage: null);
-      
+
       await _authRepository.login(username, password);
-      
+
       // Here we would typically fetch user data after login
       // For simplicity, we're just updating the auth state
-      state = state.copyWith(
-        isAuthenticated: true,
-        isLoading: false,
-      );
+      state = state.copyWith(isAuthenticated: true, isLoading: false);
     } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: e.toString(),
-      );
+      state = state.copyWith(isLoading: false, errorMessage: e.toString());
     }
   }
 
   Future<void> register(User user) async {
     try {
       state = state.copyWith(isLoading: true, errorMessage: null);
-      
+
       await _authRepository.register(user);
-      
+
       // Automatically login after registration
       await login(user.username, user.password!);
     } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: e.toString(),
-      );
+      state = state.copyWith(isLoading: false, errorMessage: e.toString());
     }
   }
 
@@ -95,10 +86,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       await _authRepository.logout();
       state = AuthState();
     } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: e.toString(),
-      );
+      state = state.copyWith(isLoading: false, errorMessage: e.toString());
     }
   }
 }

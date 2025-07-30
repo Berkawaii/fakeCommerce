@@ -10,37 +10,36 @@ import 'package:f_commerce/core/providers/providers.dart';
 
 class ProductDetailScreen extends ConsumerStatefulWidget {
   final Product product;
-  
-  const ProductDetailScreen({
-    Key? key,
-    required this.product,
-  }) : super(key: key);
+
+  const ProductDetailScreen({Key? key, required this.product})
+    : super(key: key);
 
   @override
-  ConsumerState<ProductDetailScreen> createState() => _ProductDetailScreenState();
+  ConsumerState<ProductDetailScreen> createState() =>
+      _ProductDetailScreenState();
 }
 
 class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
   int quantity = 1;
   bool isInWishlist = false;
-  
+
   @override
   void initState() {
     super.initState();
     _checkWishlistStatus();
   }
-  
+
   Future<void> _checkWishlistStatus() async {
     final storageService = ref.read(storageServiceProvider);
     setState(() {
       isInWishlist = storageService.isInWishlist(widget.product.id);
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     final cartState = ref.watch(cartStateProvider);
-    
+
     return Scaffold(
       backgroundColor: NeumorphicTheme.baseColor(context),
       body: SafeArea(
@@ -62,7 +61,9 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                       _buildQuantitySelector(),
                       SizedBox(height: 20.h),
                       _buildDescription(),
-                      SizedBox(height: 100.h), // Extra space for the bottom button
+                      SizedBox(
+                        height: 100.h,
+                      ), // Extra space for the bottom button
                     ],
                   ),
                 ),
@@ -74,7 +75,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
       bottomNavigationBar: _buildAddToCartButton(cartState),
     );
   }
-  
+
   Widget _buildAppBar() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
@@ -101,8 +102,8 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
             onPressed: _toggleWishlist,
             child: Icon(
               isInWishlist ? Icons.favorite : Icons.favorite_border,
-              color: isInWishlist 
-                  ? Colors.red 
+              color: isInWishlist
+                  ? Colors.red
                   : NeumorphicTheme.defaultTextColor(context),
               size: 24.sp,
             ),
@@ -111,7 +112,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
       ),
     );
   }
-  
+
   Widget _buildProductImage() {
     return Container(
       height: 300.h,
@@ -128,18 +129,16 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
           child: CachedNetworkImage(
             imageUrl: widget.product.imageUrl,
             fit: BoxFit.contain,
-            placeholder: (context, url) => const Center(
-              child: NeumorphicProgressIndeterminate(),
-            ),
-            errorWidget: (context, url, error) => const Center(
-              child: Icon(Icons.error_outline),
-            ),
+            placeholder: (context, url) =>
+                const Center(child: NeumorphicProgressIndeterminate()),
+            errorWidget: (context, url, error) =>
+                const Center(child: Icon(Icons.error_outline)),
           ),
         ),
       ),
     );
   }
-  
+
   Widget _buildProductInfo() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -174,7 +173,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
       ],
     );
   }
-  
+
   Widget _buildCategoryAndRating() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -199,34 +198,24 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
         if (widget.product.rating != null)
           Row(
             children: [
-              Icon(
-                Icons.star,
-                color: Colors.amber,
-                size: 20.sp,
-              ),
+              Icon(Icons.star, color: Colors.amber, size: 20.sp),
               SizedBox(width: 4.w),
               Text(
                 '${widget.product.rating!.rate} (${widget.product.rating!.count})',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
               ),
             ],
           ),
       ],
     );
   }
-  
+
   Widget _buildQuantitySelector() {
     return Row(
       children: [
         Text(
           'Quantity:',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w500,
-          ),
+          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500),
         ),
         SizedBox(width: 16.w),
         NeumorphicButton(
@@ -252,10 +241,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
         SizedBox(width: 16.w),
         Text(
           quantity.toString(),
-          style: TextStyle(
-            fontSize: 20.sp,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
         ),
         SizedBox(width: 16.w),
         NeumorphicButton(
@@ -277,17 +263,14 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
       ],
     );
   }
-  
+
   Widget _buildDescription() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Description',
-          style: TextStyle(
-            fontSize: 20.sp,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 12.h),
         Neumorphic(
@@ -303,7 +286,9 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
               style: TextStyle(
                 fontSize: 16.sp,
                 height: 1.5,
-                color: NeumorphicTheme.defaultTextColor(context).withOpacity(0.8),
+                color: NeumorphicTheme.defaultTextColor(
+                  context,
+                ).withOpacity(0.8),
               ),
             ),
           ),
@@ -311,10 +296,10 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
       ],
     );
   }
-  
+
   Widget _buildAddToCartButton(CartState cartState) {
     final totalPrice = widget.product.price * quantity;
-    
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
       decoration: BoxDecoration(
@@ -343,11 +328,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
               : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      Icons.shopping_cart,
-                      color: Colors.white,
-                      size: 24.sp,
-                    ),
+                    Icon(Icons.shopping_cart, color: Colors.white, size: 24.sp),
                     SizedBox(width: 12.w),
                     Text(
                       'Add to Cart - \$${totalPrice.toStringAsFixed(2)}',
@@ -363,20 +344,20 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
       ),
     );
   }
-  
+
   void _toggleWishlist() async {
     final storageService = ref.read(storageServiceProvider);
     await storageService.toggleWishlistItem(widget.product.id);
     setState(() {
       isInWishlist = !isInWishlist;
     });
-    
+
     // Show snackbar
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          isInWishlist 
+          isInWishlist
               ? 'Added to your wishlist'
               : 'Removed from your wishlist',
         ),
@@ -384,11 +365,11 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
       ),
     );
   }
-  
+
   void _addToCart() async {
     final cartNotifier = ref.read(cartStateProvider.notifier);
     await cartNotifier.addToCart(widget.product, quantity);
-    
+
     // Show snackbar
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
