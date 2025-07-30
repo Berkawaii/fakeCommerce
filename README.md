@@ -1,16 +1,24 @@
-# f_commerce
+# F-Commerce
 
-A new Flutter project.
+A Flutter e-commerce app with Neumorphic design.
+
+## Features
+
+- Neumorphic UI design
+- Product browsing and filtering
+- Product details view
+- Shopping cart functionality
+- User profile management
+- Dark/light theme toggle
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project uses Flutter and Dart with a feature-based architecture pattern.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Dependencies
+- flutter_riverpod: State management
+- flutter_neumorphic_plus: UI design
+- dio: Network requests
+- flutter_screenutil: Responsive UI
+- cached_network_image: Image caching
+- hive_flutter: Local storage
