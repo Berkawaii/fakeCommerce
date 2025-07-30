@@ -72,6 +72,9 @@ dev_dependencies:
   build_runner: ^2.4.8
   json_serializable: ^6.7.1
   
+  # App Icon Generator
+  flutter_launcher_icons: ^0.14.4
+  
   # Testing
   mocktail: ^1.0.2
 
