@@ -40,17 +40,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget _buildBottomNavigationBar() {
     return Neumorphic(
       style: NeumorphicStyle(
-        depth: 10,
+        depth: 5, // Reduced depth for more subtle effect
+        intensity: 0.5, // Reduced intensity for muted look
         boxShape: NeumorphicBoxShape.roundRect(
           const BorderRadius.only(
-            topLeft: Radius.circular(25),
-            topRight: Radius.circular(25),
+            topLeft: Radius.circular(20), // Slightly smaller radius
+            topRight: Radius.circular(20),
           ),
         ),
       ),
       child: Container(
-        height: 70.h,
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        height: 65.h, // Slightly smaller height
+        padding: EdgeInsets.symmetric(horizontal: 20.w), // Slightly more horizontal padding
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -77,24 +78,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         children: [
           NeumorphicIcon(
             icon,
-            size: 28.sp,
+            size: 24.sp, // Slightly smaller icon
             style: NeumorphicStyle(
-              depth: isSelected ? 4 : 0,
-              intensity: isSelected ? 0.8 : 0.5,
+              depth: isSelected ? 2 : 0, // Reduced depth for more subtle effect
+              intensity: isSelected ? 0.6 : 0.4, // Reduced intensity for muted look
               color: isSelected 
                   ? NeumorphicTheme.accentColor(context)
-                  : NeumorphicTheme.defaultTextColor(context),
+                  : NeumorphicTheme.defaultTextColor(context).withOpacity(0.7), // More muted unselected color
             ),
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: 3.h), // Slightly reduced spacing
           Text(
             label,
             style: TextStyle(
-              fontSize: 12.sp,
-              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+              fontSize: 11.sp, // Slightly smaller text
+              fontWeight: isSelected ? FontWeight.w500 : FontWeight.w400, // Less bold for more refined look
               color: isSelected 
                   ? NeumorphicTheme.accentColor(context)
-                  : NeumorphicTheme.defaultTextColor(context),
+                  : NeumorphicTheme.defaultTextColor(context).withOpacity(0.7), // More muted unselected color
             ),
           ),
         ],
