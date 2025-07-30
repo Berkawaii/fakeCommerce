@@ -1,4 +1,12 @@
-Flutter E-commerce App Documentation
+# F-Commerce - Flutter E-commerce App Documentation
+
+This document outlines the architecture and design of F-Commerce, a modern, fast Flutter e-commerce app for iOS & Android. It uses the FakeStoreAPI (https://fakestoreapi.com) as a backend, and adopts a Neumorphic ("soft UI") design style for a sleek, tactile look. 
+
+## App Overview
+
+F-Commerce includes typical e-commerce screens: product catalog, details, cart, checkout flow, user authentication/profile, order history, and optional admin product management. Key technologies include Riverpod for state management, Dio for networking, Hive for local storage, and flutter_neumorphic_plus for UI design.
+
+The project follows a feature-first architecture with clean separation of concerns, making it maintainable and scalable. Each feature module contains its own data and presentation layers.utter E-commerce App Documentation
 This document outlines the architecture and design of a modern, fast Flutter e-commerce app for iOS & Android. It uses the FakeStoreAPI (https://fakestoreapi.com) as a backend, and adopts a Neumorphic (“soft UI”) design style for a sleek, tactile look. The app includes typical e-commerce screens: product catalog, details, cart, checkout flow, user authentication/profile, order history, and optional admin product management. Key technologies include Riverpod for state management, Dio/http for networking, Hive/SharedPreferences for local storage, and relevant UI/animation packages. Testing and performance best practices are covered.
 UI/UX & Neumorphic Design
 Neumorphic (soft UI) interfaces use subtle shadows and highlights to make elements appear carved into or protruding from the background. Neumorphism blends flat design and skeuomorphism, yielding a minimalist yet tactile aesthetic[1][2]. Key Neumorphism principles include:
