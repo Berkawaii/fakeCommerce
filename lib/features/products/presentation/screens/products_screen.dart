@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +8,7 @@ import 'package:f_commerce/features/products/presentation/screens/product_detail
 import 'package:f_commerce/core/theme/app_theme.dart';
 
 class ProductsScreen extends ConsumerStatefulWidget {
-  const ProductsScreen({Key? key}) : super(key: key);
+  const ProductsScreen({super.key});
 
   @override
   ConsumerState<ProductsScreen> createState() => _ProductsScreenState();

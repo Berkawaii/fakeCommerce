@@ -39,6 +39,22 @@ class ApiClient {
     );
   }
 
+  // Clear auth token interceptor
+  void clearAuthToken() {
+    _dio.interceptors.clear();
+    // Reinitialize log interceptor only
+    _dio.interceptors.add(
+      LogInterceptor(
+        request: kDebugMode,
+        requestHeader: kDebugMode,
+        requestBody: kDebugMode,
+        responseHeader: kDebugMode,
+        responseBody: kDebugMode,
+        error: kDebugMode,
+      ),
+    );
+  }
+
   // Generic GET request
   Future<T> get<T>({
     required String endpoint,
@@ -175,41 +191,41 @@ class ApiException implements Exception {
 }
 
 class TimeoutException extends ApiException {
-  TimeoutException(String message) : super(message);
+  TimeoutException(super.message);
 }
 
 class NetworkException extends ApiException {
-  NetworkException(String message) : super(message);
+  NetworkException(super.message);
 }
 
 class BadRequestException extends ApiException {
-  BadRequestException(String message) : super(message);
+  BadRequestException(super.message);
 }
 
 class UnauthorizedException extends ApiException {
-  UnauthorizedException(String message) : super(message);
+  UnauthorizedException(super.message);
 }
 
 class ForbiddenException extends ApiException {
-  ForbiddenException(String message) : super(message);
+  ForbiddenException(super.message);
 }
 
 class NotFoundException extends ApiException {
-  NotFoundException(String message) : super(message);
+  NotFoundException(super.message);
 }
 
 class ConflictException extends ApiException {
-  ConflictException(String message) : super(message);
+  ConflictException(super.message);
 }
 
 class ValidationException extends ApiException {
-  ValidationException(String message) : super(message);
+  ValidationException(super.message);
 }
 
 class ServerException extends ApiException {
-  ServerException(String message) : super(message);
+  ServerException(super.message);
 }
 
 class RequestCancelledException extends ApiException {
-  RequestCancelledException(String message) : super(message);
+  RequestCancelledException(super.message);
 }

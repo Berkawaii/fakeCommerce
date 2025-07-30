@@ -61,11 +61,12 @@ class AuthRepository {
   // Check if user is logged in
   Future<bool> isLoggedIn() async {
     final token = await _storageService.getAuthToken();
-    return token != null;
+    return token != null && token.isNotEmpty;
   }
 
   // Logout
   Future<void> logout() async {
     await _storageService.clearAllData();
+    _apiClient.clearAuthToken();
   }
 }

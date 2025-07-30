@@ -1,18 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:f_commerce/features/products/data/product_model.dart';
 import 'package:f_commerce/features/cart/data/cart_providers.dart';
-import 'package:f_commerce/core/storage/storage_service.dart';
 import 'package:f_commerce/core/providers/providers.dart';
 
 class ProductDetailScreen extends ConsumerStatefulWidget {
   final Product product;
 
-  const ProductDetailScreen({Key? key, required this.product})
-    : super(key: key);
+  const ProductDetailScreen({super.key, required this.product});
 
   @override
   ConsumerState<ProductDetailScreen> createState() =>

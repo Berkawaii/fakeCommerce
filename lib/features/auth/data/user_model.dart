@@ -25,7 +25,32 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
-  Map<String, dynamic> toJson() => _$UserToJson(this);
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {
+      'id': id,
+      'username': username,
+      'email': email,
+    };
+
+    if (password != null) {
+      data['password'] = password;
+    }
+
+    if (name != null) {
+      data['name'] = {'firstname': name!.firstname, 'lastname': name!.lastname};
+    }
+
+    if (phone != null) {
+      data['phone'] = phone;
+    }
+
+    if (address != null) {
+      data['address'] = address!.toJson();
+    }
+
+    return data;
+  }
 }
 
 @JsonSerializable()
